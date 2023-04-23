@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerador de Termos de Busca Avançada no Google</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #002b30;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d90057;
+            font-size: 30px;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #171717;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        label, input, select {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        label {
+            color: #d90057;
+            font-size: 14px;
+        }
+
+        input, select {
+            padding: 8px;
+            border: 1px solid #d90057;
+            border-radius: 3px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="date"] {
+            width: auto;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #d90057;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #d90057;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Termos de Busca Avançada no Google</h1>
+    <form action="https://www.google.com/search" method="get" target="_blank">
+        <label for="termo">Termo de busca:</label>
+        <input type="text" id="termo" name="q">
+        <label for="exato">Busca exata:</label>
+        <input type="text" id="exato" name="as_epq">
+        <label for="dominio">Domínio:</label>
+        <input type="text" id="dominio" name="as_sitesearch">
+        <label for="tipo_arquivo">Tipo de arquivo:</label>
+        <select id="tipo_arquivo" name="as_filetype">
+            <option value="">Qualquer tipo de arquivo</option>
+            <option value="pdf">PDF</option>
+            <option value="doc">Documento do Word</option>
+            <option value="xls">Planilha do Excel</option>
+            <option value="ppt">Apresentação do PowerPoint</option>
+           
+
+    </select>
+    <input type="submit" value="Buscar">
+    <input type="button" value="Limpar" onclick="limparFormulario()">
+</form>
+<p>Criado por Aleksandro Alves Da Rocha Junior</p>
+
+<script>
+    // Função para limpar o formulário
+    function limparFormulario() {
+        document.getElementById("termo").value = "";
+        document.getElementById("exato").value = "";
+        document.getElementById("dominio").value = "";
+        document.getElementById("tipo_arquivo").value = "";
+    }
+</script>
+</body>
+</html>
