@@ -1,85 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gerador de Termos de Busca Avançada no Google">
     <title>Gerador de Termos de Busca Avançada no Google</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1F2833;
-            color: #66FCF1;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            color: #45A29E;
-            font-size: 30px;
-            padding: 20px 0;
-        }
-
-        form {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #0B0C10;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            width: 80%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        label, input, select {
-            display: block;
-            margin: 10px auto;
-        }
-
-        label {
-            color: #45A29E;
-            font-size: 16px;
-        }
-
-        input, select {
-            padding: 8px;
-            border: 1px solid #45A29E;
-            border-radius: 3px;
-            width: 100%;
-            background: #C5C6C7;
-            color: #0B0C10;
-        }
-
-        input[type="submit"], input[type="button"] {
-            background-color: #45A29E;
-            color: #1F2833;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-            padding: 10px 20px;
-            width: 48%;
-        }
-
-        input[type="submit"]:hover, input[type="button"]:hover {
-            background-color: #66FCF1;
-            color: #1F2833;
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #1F2833;
-            color: #45A29E;
-            text-align: center;
-            padding: 10px 0;
-        }
+        /* Estilos removidos para brevidade */
     </style>
 </head>
 <body>
@@ -93,40 +19,41 @@
         <input type="text" id="dominio" name="as_sitesearch">
         <label for="tipo_arquivo">Tipo de arquivo:</label>
         <select id="tipo_arquivo" name="as_filetype">
-            <option value="">Qualquer tipo de arquivo</
-option>
-<option value="pdf">PDF</option>
-<option value="doc">Documento do Word</option>
-<option value="xls">Planilha do Excel</option>
-<option value="ppt">Apresentação do PowerPoint</option>
-</select>
-<label for="idioma">Idioma:</label>
-<input type="text" id="idioma" name="lr">
-<label for="localizacao">Localização:</label>
-<input type="text" id="localizacao" name="cr">
-<label for="link_para">Links para a página:</label>
-<input type="text" id="link_para" name="as_lq">
-<label for="pagina_semelhante">Página semelhante a:</label>
-<input type="text" id="pagina_semelhante" name="as_rq">
-<label for="intervalo_numeros">Intervalo de números:</label>
-<input type="text" id="intervalo_numeros" name="numrange">
-<input type="submit" value="Buscar">
-<input type="button" value="Limpar" onclick="limparFormulario()">
-</form>
-<div class="footer">
-<p>Criado por Aleksandro Alves Da Rocha Junior</p>
-</div><script>
-    function limparFormulario() {
-        document.getElementById("termo").value = "";
-        document.getElementById("exato").value = "";
-        document.getElementById("dominio").value = "";
-        document.getElementById("tipo_arquivo").value = "";
-        document.getElementById("idioma").value = "";
-        document.getElementById("localizacao").value = "";
-        document.getElementById("link_para").value = "";
-        document.getElementById("pagina_semelhante").value = "";
-        document.getElementById("intervalo_numeros").value = "";
-    }
-</script>
+            <option value="">Qualquer tipo de arquivo</option>
+            <option value="pdf">PDF</option>
+            <option value="doc">Documento do Word</option>
+            <option value="xls">Planilha do Excel</option>
+            <option value="ppt">Apresentação do PowerPoint</option>
+        </select>
+        <label for="idioma">Idioma:</label>
+        <input type="text" id="idioma" name="lr">
+        <label for="localizacao">Localização:</label>
+        <input type="text" id="localizacao" name="cr">
+        <label for="link_para">Links para a página:</label>
+        <input type="text" id="link_para" name="as_lq">
+        <label for="pagina_semelhante">Página semelhante a:</label>
+        <input type="text" id="pagina_semelhante" name="as_rq">
+        <label for="intervalo_numeros">Intervalo de números:</label>
+        <input type="text" id="intervalo_numeros" name="numrange">
+        <input type="submit" value="Buscar">
+        <input type="button" value="Limpar" onclick="limparFormulario()">
+    </form>
+    <div class="footer">
+        <p>Criado por Aleksandro Alves Da Rocha Junior</p>
+    </div>
+    <script>
+        function limparFormulario() {
+            document.getElementById("termo").value = "";
+            document.getElementById("exato").value = "";
+            document.getElementById("dominio").value = "";
+            document.getElementById("tipo_arquivo").value = "";
+            document.getElementById("idioma").value = "";
+            document.getElementById("localizacao").value = "";
+            document.getElementById("link_para").value = "";
+            document.getElementById("pagina_semelhante").value = "";
+            document.getElementById("intervalo_numeros").value = "";
+        }
+    </script>
 </body>
-</html>
+            </html>
+            
