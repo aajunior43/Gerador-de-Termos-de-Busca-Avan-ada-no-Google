@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Gerador de Termos de Busca Avançada no Google">
     <title>Gerador de Termos de Busca Avançada no Google</title>
     <style>
-        /* Estilos removidos para brevidade */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #E50914;
+            font-size: 30px;
+            padding: 20px 0;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label, input, select {
+            display: block;
+            margin: 10px auto;
+        }
+
+        label {
+            color: #E50914;
+            font-size: 16px;
+        }
+
+        input, select {
+            padding: 8px;
+            border: 1px solid #E50914;
+            border-radius: 3px;
+            width: 100%;
+            background: #000000;
+            color: #FFFFFF;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #E50914;
+            color: #000000;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            padding: 10px 20px;
+            width: 48%;
+        }
+
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #000000;
+            color: #E50914;
+            text-align: center;
+            padding: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -55,5 +129,4 @@
         }
     </script>
 </body>
-            </html>
-            
+</html>
