@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Gerador de Termos de Busca Avançada no Google</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000000;
+        color: #FFD700; /* Yellow */
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1, label, input, select {
+        color: #FFD700; /* Yellow */
+    }
+
+    form {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #000000;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(255,215,0,0.1); /* Yellow shadow */
+        width: 90%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    label, input, select {
+        display: block;
+        margin: 10px auto;
+        width: 80%;
+    }
+
+    input[type="text"], select {
+        border: 1px solid #FFD700;
+        padding: 10px;
+    }
+
+    button {
+        background-color: #FFD700;
+        border: none;
+        color: #000000;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px auto;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #E6B800;
+    }
+
+    footer {
+        padding: 20px;
+        background-color: #000000;
+        color: #FFD700;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+        form {
+            width: 95%;
+        }
+    }
+
+    input[type="text"] {
+        color: #000000; /* Black */
+    }
+</style>
+</head>
+<body>
+<h1>Gerador de Termos de Busca Avançada no Google</h1>
+<form action="https://www.google.com/search" method="get" target="_blank">
+<label for="termo">Termo de busca:</label>
+<input id="termo" name="q" type="text"/>
+<label for="exato">Busca exata:</label>
+<input id="exato" name="as_epq" type="text"/><input id="exato" name="as_epq" type="text"/><input id="exato" name="as_epq" type="text"/>
+<label for="dominio">Domínio:</label>
+<input id="dominio" name="as_sitesearch" type="text"/>
+<label for="tipo_arquivo">Tipo de arquivo:</label>
+<select id="tipo_arquivo" name="as_filetype">
+<option value="">Qualquer tipo de arquivo</option>
+<option value="pdf">PDF</option>
+<option value="doc">Documento do Word</option>
+<option value="xls">Planilha do Excel</option>
+<option value="ppt">Apresentação do PowerPoint</option>
+</select>
+<label for="idioma">Idioma:</label>
+<input id="idioma" name="lr" type="text"/>
+<label for="localizacao">Localização:</label>
+<input id="localizacao" name="cr" type="text"/>
+<label for="link_para">Links para a página:</label>
+<input id="link_para" name="as_lq" type="text"/>
+<label for="pagina_semelhante">Página semelhante a:</label>
+<input id="pagina_semelhante" name="as_rq" type="text"/>
+<label for="intervalo_numeros">Intervalo de números:</label>
+<input id="intervalo_numeros" name="numrange" type="text"/>
+<input type="submit" value="Buscar"/>
+<input onclick="limparFormulario()" type="button" value="Limpar"/>
+</form>
+<div class="footer">
+<p>Criado por Aleksandro Alves Da Rocha Junior</p>
+</div>
+<script>
+        function limparFormulario() {
+            document.getElementById("termo").value = "";
+            document.getElementById("exato").value = "";
+            document.getElementById("dominio").value = "";
+            document.getElementById("tipo_arquivo").value = "";
+            document.getElementById("idioma").value = "";
+            document.getElementById("localizacao").value = "";
+            document.getElementById("link_para").value = "";
+            document.getElementById("pagina_semelhante").value = "";
+            document.getElementById("intervalo_numeros").value = "";
+        }
+    </script>
+<footer style="padding: 20px; background-color: #000000; color: #FFFF00; font-size: 14px;">Direitos Reservados © Aleksandro Alves da Rocha Junior</footer></body>
+</html>
