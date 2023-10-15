@@ -8,16 +8,16 @@
         body {
             font-family: 'Arial', sans-serif;
             padding: 20px;
-            background-color: #FFD700; /* Ouro */
-            color: #8B6914; /* Ouro Escuro */
+            background-color: #D4AF37; /* Cor de Ouro */
+            color: #fff; /* Texto branco */
         }
         h2 {
-            color: #8B6914; /* Ouro Escuro */
+            color: #FFD700; /* Ouro mais claro */
         }
         form {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #FFCC00; /* Ouro Claro */
+            background-color: #FFD700; /* Ouro mais claro */
             padding: 20px;
             border-radius: 10px;
         }
@@ -36,8 +36,8 @@
             width: auto;
             padding: 10px 20px;
             cursor: pointer;
-            background-color: #8B6914; /* Ouro Escuro */
-            color: #FFD700; /* Ouro */
+            background-color: #fff;
+            color: #FFD700;
             border: none;
             border-radius: 5px;
         }
@@ -61,25 +61,19 @@
         <option value="">Nenhum</option>
         <option value="pdf">PDF</option>
         <option value="doc">DOC</option>
+        <option value="docx">DOCX</option>
+        <option value="ppt">PPT</option>
+        <option value="pptx">PPTX</option>
+        <option value="xls">XLS</option>
+        <option value="xlsx">XLSX</option>
+        <option value="txt">TXT</option>
+        <option value="jpg">JPG</option>
+        <option value="png">PNG</option>
+        <option value="gif">GIF</option>
     </select>
 
     <label for="site">Busca em site específico:</label>
     <input type="text" id="site" name="site" placeholder="Buscar em um site específico" oninput="formatQuery()">
-
-    <label for="intext">Texto exato no corpo:</label>
-    <input type="text" id="intext" name="intext" placeholder="Texto exato no corpo" oninput="formatQuery()">
-
-    <label for="intitle">Texto exato no título:</label>
-    <input type="text" id="intitle" name="intitle" placeholder="Texto exato no título" oninput="formatQuery()">
-
-    <label for="link">Link para:</label>
-    <input type="text" id="link" name="link" placeholder="Link para" oninput="formatQuery()">
-
-    <label for="related">Sites relacionados a:</label>
-    <input type="text" id="related" name="related" placeholder="Sites relacionados a" oninput="formatQuery()">
-
-    <label for="stocks">Ações de:</label>
-    <input type="text" id="stocks" name="stocks" placeholder="Ações de" oninput="formatQuery()">
 
     <input type="hidden" id="finalQuery" name="q">
     <input type="submit" value="Pesquisar">
@@ -92,49 +86,32 @@
         let inurlQuery = document.getElementById('inurl').value;
         let filetypeQuery = document.getElementById('filetype').value;
         let siteQuery = document.getElementById('site').value;
-        let intextQuery = document.getElementById('intext').value;
-        let intitleQuery = document.getElementById('intitle').value;
-        let linkQuery = document.getElementById('link').value;
-        let relatedQuery = document.getElementById('related').value;
-        let stocksQuery = document.getElementById('stocks').value;
 
         let finalQuery = normalQuery;
 
         if (exactQuery) {
             finalQuery += ' "' + exactQuery + '"';
         }
+
         if (inurlQuery) {
             finalQuery += ' inurl:' + inurlQuery;
         }
+
         if (filetypeQuery) {
             finalQuery += ' filetype:' + filetypeQuery;
         }
+
         if (siteQuery) {
             finalQuery += ' site:' + siteQuery;
-        }
-        if (intextQuery) {
-            finalQuery += ' intext:' + intextQuery;
-        }
-        if (intitleQuery) {
-            finalQuery += ' intitle:' + intitleQuery;
-        }
-        if (linkQuery) {
-            finalQuery += ' link:' + linkQuery;
-        }
-        if (relatedQuery) {
-            finalQuery += ' related:' + relatedQuery;
-        }
-        if (stocksQuery) {
-            finalQuery += ' stocks:' + stocksQuery;
         }
 
         document.getElementById('finalQuery').value = finalQuery;
     }
 
     function validateForm() {
-        let queryValue = document.getElementById('finalQuery').value;
-        if (!queryValue) {
-            alert('Por favor, insira algum termo de busca.');
+        let finalQuery = document.getElementById('finalQuery').value;
+        if (!finalQuery.trim()) {
+            alert('Por favor, preencha pelo menos um campo de busca.');
             return false;
         }
         return true;
