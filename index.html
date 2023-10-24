@@ -1,149 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa Avançada no Google</title>
+    <title>Google Dorks</title>
     <style>
-        /* Estilo Geral */
         body {
-            font-family: 'Arial', sans-serif;
-            padding: 20px;
-            background-color: #1B1B1B; /* Bat-Black */
-            color: #FFFFFF; /* Bat-White */
+            font-family: Arial, sans-serif;
+            margin: 50px;
         }
-        h2 {
-            color: #FF6B6B; /* Bat-Signal-Red */
+        label {
+            display: block;
+            margin: 10px 0;
         }
-        /* Estilo do Formulário */
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #2C3E50; /* Dark Knight Blue */
-            padding: 20px;
-            border-radius: 10px;
-        }
-        label, input, select {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        input, select {
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #FF4136;
+            color: #FFF;
             border: none;
-            outline: none;
-            background-color: #34495E; /* Bat-Input-Blue */
-            color: #ECF0F1; /* Bat-Text-White */
-        }
-        input[type="submit"] {
-            width: auto;
-            padding: 10px 20px;
             cursor: pointer;
-            background-color: #E74C3C; /* Bat-Button-Red */
-            color: #FFFFFF; /* Bat-White */
-            border: none;
             border-radius: 5px;
+        }
+        button:hover {
+            background-color: #FF5733;
         }
     </style>
 </head>
+
 <body>
 
-<h2>Pesquisa Avançada no Google</h2>
-<form action="https://www.google.com/search" method="get" onsubmit="return validateForm()">
-    <label for="normalQuery">Pesquisa Normal:</label>
-    <input type="text" id="normalQuery" name="normalQuery" placeholder="Digite sua busca normal aqui" oninput="formatQuery()">
+    <h1>Google Dorks</h1>
 
-    <label for="query">Busca exata:</label>
-    <input type="text" id="query" placeholder="Digite sua busca exata aqui" oninput="formatQuery()">
+    <form id="dorkForm">
+        <label for="pesquisaComum">PESQUISA COMUM:</label>
+        <input type="text" id="pesquisaComum" placeholder="Digite aqui">
 
-    <label for="inurl">Busca no URL:</label>
-    <input type="text" id="inurl" name="inurl" placeholder="Palavra ou frase no URL" oninput="formatQuery()">
+        <label for="buscaExata">BUSCA EXATA:</label>
+        <input type="text" id="buscaExata" placeholder="Digite aqui">
 
-    <label for="filetype">Tipo de arquivo:</label>
-    <select id="filetype" name="filetype" onchange="formatQuery()">
-        <option value="">Nenhum</option>
-        <option value="pdf">PDF</option>
-        <option value="doc">DOC</option>
-    </select>
+        <label for="buscaExata2">BUSCA EXATA 2:</label>
+        <input type="text" id="buscaExata2" placeholder="Digite aqui">
 
-    <label for="site">Busca em site específico:</label>
-    <input type="text" id="site" name="site" placeholder="Buscar em um site específico" oninput="formatQuery()">
+        <label for="intext">INTEXT:</label>
+        <input type="text" id="intext" placeholder="Digite aqui">
 
-    <label for="intext">Texto exato no corpo:</label>
-    <input type="text" id="intext" name="intext" placeholder="Texto exato no corpo" oninput="formatQuery()">
+        <label for="intitle">INTITLE:</label>
+        <input type="text" id="intitle" placeholder="Digite aqui">
 
-    <label for="intitle">Texto exato no título:</label>
-    <input type="text" id="intitle" name="intitle" placeholder="Texto exato no título" oninput="formatQuery()">
+        <label for="site">SITE:</label>
+        <input type="text" id="site" placeholder="Digite aqui">
 
-    <label for="link">Link para:</label>
-    <input type="text" id="link" name="link" placeholder="Link para" oninput="formatQuery()">
+        <label for="inurl">INURL:</label>
+        <input type="text" id="inurl" placeholder="Digite aqui">
 
-    <label for="related">Sites relacionados a:</label>
-    <input type="text" id="related" name="related" placeholder="Sites relacionados a" oninput="formatQuery()">
+        <label for="filetype">FILETYPE:</label>
+        <input type="text" id="filetype" placeholder="Digite aqui">
 
-    <label for="stocks">Ações de:</label>
-    <input type="text" id="stocks" name="stocks" placeholder="Ações de" oninput="formatQuery()">
+        <button type="button" onclick="performSearch()">PESQUISAR</button>
+    </form>
 
-    <input type="hidden" id="finalQuery" name="q">
-    <input type="submit" value="Pesquisar">
-</form>
+    <script>
+        function performSearch() {
+            let query = '';
+            
+            if (document.getElementById('pesquisaComum').value) query += document.getElementById('pesquisaComum').value + ' ';
+            if (document.getElementById('buscaExata').value) query += '"' + document.getElementById('buscaExata').value + '" ';
+            if (document.getElementById('buscaExata2').value) query += '"' + document.getElementById('buscaExata2').value + '" ';
+            if (document.getElementById('intext').value) query += 'intext:' + document.getElementById('intext').value + ' ';
+            if (document.getElementById('intitle').value) query += 'intitle:' + document.getElementById('intitle').value + ' ';
+            if (document.getElementById('site').value) query += 'site:' + document.getElementById('site').value + ' ';
+            if (document.getElementById('inurl').value) query += 'inurl:' + document.getElementById('inurl').value + ' ';
+            if (document.getElementById('filetype').value) query += 'filetype:' + document.getElementById('filetype').value + ' ';
 
-<script>
-    function formatQuery() {
-        let normalQuery = document.getElementById('normalQuery').value;
-        let exactQuery = document.getElementById('query').value;
-        let inurlQuery = document.getElementById('inurl').value;
-        let filetypeQuery = document.getElementById('filetype').value;
-        let siteQuery = document.getElementById('site').value;
-        let intextQuery = document.getElementById('intext').value;
-        let intitleQuery = document.getElementById('intitle').value;
-        let linkQuery = document.getElementById('link').value;
-        let relatedQuery = document.getElementById('related').value;
-        let stocksQuery = document.getElementById('stocks').value;
-
-        let finalQuery = normalQuery;
-
-        if (exactQuery) {
-            finalQuery += ' "' + exactQuery + '"';
+            window.open('https://www.google.com/search?q=' + encodeURIComponent(query));
         }
-        if (inurlQuery) {
-            finalQuery += ' inurl:' + inurlQuery;
-        }
-        if (filetypeQuery) {
-            finalQuery += ' filetype:' + filetypeQuery;
-        }
-        if (siteQuery) {
-            finalQuery += ' site:' + siteQuery;
-        }
-        if (intextQuery) {
-            finalQuery += ' intext:' + intextQuery;
-        }
-        if (intitleQuery) {
-            finalQuery += ' intitle:' + intitleQuery;
-        }
-        if (linkQuery) {
-            finalQuery += ' link:' + linkQuery;
-        }
-        if (relatedQuery) {
-            finalQuery += ' related:' + relatedQuery;
-        }
-        if (stocksQuery) {
-            finalQuery += ' stocks:' + stocksQuery;
-        }
-
-        document.getElementById('finalQuery').value = finalQuery;
-    }
-
-    function validateForm() {
-        let queryValue = document.getElementById('finalQuery').value;
-        if (!queryValue) {
-            alert('Por favor, insira algum termo de busca.');
-            return false;
-        }
-        return true;
-    }
-</script>
+    </script>
 
 </body>
+
 </html>
