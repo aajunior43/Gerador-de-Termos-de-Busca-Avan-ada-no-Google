@@ -1,134 +1,458 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Dorks</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 50px;
-            background-color: #121212; /* Dark theme background */
-            color: #c0c0c0; /* Light text color for dark theme */
-        }
-
-        h1 {
-            text-align: center;
-            color: #76ff03; /* Neon green for titles */
-            margin-bottom: 50px;
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #292929; /* Slightly lighter dark shade for form background */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            font-weight: 500;
-            margin: 10px 0;
-            color: #c0c0c0; /* Light text color for dark theme */
-        }
-
-        input {
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 16px;
-            border: 1px solid #333333; /* Dark borders for inputs */
-            background-color: #222; /* Dark input fields */
-            color: #fff; /* Light text input color */
-            border-radius: 5px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus {
-            border-color: #76ff03; /* Neon green focus border */
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: #76ff03; /* Neon green background for button */
-            color: #121212; /* Dark text color for light button */
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover, button:focus {
-            background-color: #64dd17; /* Lighter shade of green for hover effect */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ferramenta avançada para criação de Google Dorks">
+  <title>Google Dorks Generator Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Tema: Preto e Roxo Escuro */
+    :root {
+      --primary-color: #8e24aa; /* Roxo escuro */
+      --background: #121212;    /* Preto */
+      --surface: #1e1e1e;       /* Preto levemente mais claro */
+      --accent-color: #d81b60;  /* Um tom complementar para hover */
+      --text-primary: #ffffff;
+      --text-secondary: #bdbdbd;
+      --error: #ff5252;
+      --success: #4caf50;
+      --transition-speed: 0.3s;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #121212, #1b1b1b);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--primary-color);
+      padding-bottom: 1rem;
+    }
+    
+    header h1 {
+      color: var(--primary-color);
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    header p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    
+    /* Formulário */
+    form {
+      margin-bottom: 1rem;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .form-grid.single {
+      grid-template-columns: 1fr;
+    }
+    
+    .input-group {
+      position: relative;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background: #2c2c2c;
+      color: var(--text-primary);
+      transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+    
+    input[type="text"]:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px var(--primary-color);
+      outline: none;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    .actions button {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary-color);
+      border: none;
+      color: var(--background);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .actions button:hover {
+      background: var(--accent-color);
+      transform: scale(1.05);
+    }
+    
+    /* Botão de Toggle para Opções Avançadas */
+    #toggleAdvanced {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+      margin: 0 auto 1rem auto;
+      display: block;
+      font-weight: 500;
+    }
+    
+    #toggleAdvanced:hover {
+      background: var(--primary-color);
+      color: var(--background);
+      transform: scale(1.05);
+    }
+    
+    /* Seção Avançada (Collapsible) */
+    #advancedOptions {
+      display: none;
+      margin-bottom: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--text-secondary);
+    }
+    
+    /* Preview e Chips */
+    .preview, .chips {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      word-break: break-all;
+      font-size: 0.95rem;
+    }
+    
+    .preview {
+      display: none;
+    }
+    
+    .preview.active {
+      display: block;
+    }
+    
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .chip {
+      background: var(--primary-color);
+      color: var(--background);
+      padding: 0.3rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    /* Notificações (toasts) */
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      color: #ffffff;
+      display: none;
+      opacity: 0;
+      transition: opacity var(--transition-speed) ease;
+      font-size: 0.95rem;
+    }
+    
+    .notification.show {
+      display: block;
+      opacity: 1;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding-top: 1rem;
+      border-top: 1px solid var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Google Dorks Avançado</h1>
+  <div class="container">
+    <header>
+      <h1>Google Dorks Generator Pro</h1>
+      <p>Crie pesquisas avançadas no Google combinando diferentes operadores de busca.</p>
+    </header>
+
     <form id="dorkForm">
-        <label for="pesquisaComum">PESQUISA COMUM:</label>
-        <input type="text" id="pesquisaComum" placeholder="Digite aqui">
-        
-        <label for="buscaExata">BUSCA EXATA:</label>
-        <input type="text" id="buscaExata" placeholder="Digite aqui">
-        
-        <label for="buscaExata2">BUSCA EXATA 2:</label>
-        <input type="text" id="buscaExata2" placeholder="Digite aqui">
-        
-        <label for="intext">INTEXT:</label>
-        <input type="text" id="intext" placeholder="Digite aqui">
-        
-        <label for="intitle">INTITLE:</label>
-        <input type="text" id="intitle" placeholder="Digite aqui">
-        
-        <label for="site">SITE:</label>
-        <input type="text" id="site" placeholder="Digite aqui">
-        
-        <label for="inurl">INURL:</label>
-        <input type="text" id="inurl" placeholder="Digite aqui">
-        
-        <label for="filetype">FILETYPE:</label>
-        <input type="text" id="filetype" placeholder="Digite aqui">
+      <!-- Campos Básicos: Apenas Termos Gerais e Frase Exata -->
+      <div class="form-grid single">
+        <div class="input-group">
+          <label for="pesquisaComum">Termos Gerais</label>
+          <input type="text" id="pesquisaComum" placeholder="Ex: segurança informação">
+        </div>
+        <div class="input-group">
+          <label for="buscaExata">Frase Exata</label>
+          <input type="text" id="buscaExata" placeholder='Ex: "senha de administrador"'>
+        </div>
+      </div>
 
-        <label for="link">LINK:</label>
-        <input type="text" id="link" placeholder="Digite aqui">
+      <!-- Botão para Alternar Opções Avançadas -->
+      <button type="button" id="toggleAdvanced" onclick="toggleAdvancedOptions()">
+        Opções Avançadas <i class="fas fa-chevron-down"></i>
+      </button>
 
-        <label for="related">RELATED:</label>
-        <input type="text" id="related" placeholder="Digite aqui">
-        
-        <label for="cache">CACHE:</label>
-        <input type="text" id="cache" placeholder="Digite aqui">
-        
-        <button type="button" onclick="performSearch()">PESQUISAR</button>
+      <!-- Seção Avançada: Campos Ocultos -->
+      <div id="advancedOptions">
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="intext">No Texto (intext)</label>
+            <input type="text" id="intext" placeholder="Ex: confidential">
+          </div>
+          <div class="input-group">
+            <label for="intitle">No Título (intitle)</label>
+            <input type="text" id="intitle" placeholder="Ex: index of">
+          </div>
+          <div class="input-group">
+            <label for="site">Site Específico (site)</label>
+            <input type="text" id="site" placeholder="Ex: example.com">
+          </div>
+          <div class="input-group">
+            <label for="inurl">Na URL (inurl)</label>
+            <input type="text" id="inurl" placeholder="Ex: admin">
+          </div>
+          <div class="input-group">
+            <label for="filetype">Tipo de Arquivo (filetype)</label>
+            <input type="text" id="filetype" placeholder="Ex: pdf">
+          </div>
+          <div class="input-group">
+            <label for="excluirTermos">Excluir Termos</label>
+            <input type="text" id="excluirTermos" placeholder="Ex: spam, anúncio">
+          </div>
+          <div class="input-group">
+            <label for="inanchor">No Âncora (inanchor)</label>
+            <input type="text" id="inanchor" placeholder="Ex: clique aqui">
+          </div>
+        </div>
+      </div>
+
+      <!-- Ações -->
+      <div class="actions">
+        <button type="button" onclick="previewSearch()">
+          <i class="fas fa-eye"></i> Visualizar
+        </button>
+        <button type="button" onclick="performSearch()">
+          <i class="fas fa-search"></i> Pesquisar
+        </button>
+        <button type="button" onclick="copyQuery()">
+          <i class="fas fa-copy"></i> Copiar
+        </button>
+        <button type="button" onclick="clearForm()">
+          <i class="fas fa-trash"></i> Limpar
+        </button>
+      </div>
     </form>
-    <script>
-        function performSearch() {
-            let query = '';
-            const fields = ['pesquisaComum', 'buscaExata', 'buscaExata2', 'intext', 'intitle', 'site', 'inurl', 'filetype', 'link', 'related', 'cache'];
-            fields.forEach(field => {
-                const value = document.getElementById(field).value;
-                if (value) {
-                    switch (field) {
-                        case 'pesquisaComum':
-                            query += `${value} `;
-                            break;
-                        case 'buscaExata':
-                        case 'buscaExata2':
-                            query += `"${value}" `;
-                            break;
-                        default:
-                            query += `${field}:${value} `;
-                    }
-                }
-            });
-            window.open('https://www.google.com/search?q=' + encodeURIComponent(query), '_blank');
+
+    <!-- Preview e Chips -->
+    <div id="queryPreview" class="preview"></div>
+    <div id="queryChips" class="chips"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Criado por Aleksandro Alves
+  </footer>
+
+  <!-- Notificação (toast) -->
+  <div id="notification" class="notification"></div>
+
+  <script>
+    // Mapeia os operadores e suas formatações
+    const operators = {
+      pesquisaComum: value => value,
+      buscaExata: value => `"${value}"`,
+      intext: value => `intext:${value}`,
+      intitle: value => `intitle:${value}`,
+      site: value => `site:${value}`,
+      inurl: value => `inurl:${value}`,
+      filetype: value => `filetype:${value}`,
+      excluirTermos: value => value.split(',').map(term => '-' + term.trim()).join(' '),
+      inanchor: value => `inanchor:${value}`
+    };
+
+    // Atualiza o preview em tempo real
+    document.querySelectorAll('#dorkForm input').forEach(input => {
+      input.addEventListener('input', updatePreview);
+    });
+
+    function updatePreview() {
+      const query = buildQuery(false);
+      const previewElement = document.getElementById('queryPreview');
+      if (query) {
+        previewElement.textContent = query;
+        previewElement.classList.add('active');
+        updateChips();
+      } else {
+        previewElement.textContent = '';
+        previewElement.classList.remove('active');
+        document.getElementById('queryChips').innerHTML = '';
+      }
+    }
+
+    // Atualiza os "chips" que mostram quais operadores foram utilizados
+    function updateChips() {
+      const chipsContainer = document.getElementById('queryChips');
+      chipsContainer.innerHTML = '';
+      for (const field in operators) {
+        const input = document.getElementById(field);
+        const value = input.value.trim();
+        if (value) {
+          const chip = document.createElement('div');
+          chip.classList.add('chip');
+          chip.textContent = field;
+          chipsContainer.appendChild(chip);
         }
-    </script>
+      }
+    }
+
+    // Monta a query com base nos campos preenchidos
+    function buildQuery(showError = true) {
+      let queryParts = [];
+      for (const [field, formatter] of Object.entries(operators)) {
+        const input = document.getElementById(field);
+        const value = input.value.trim();
+        if (value) {
+          queryParts.push(formatter(value));
+        }
+      }
+      if (queryParts.length === 0) {
+        if (showError) showNotification('Por favor, preencha pelo menos um campo!', 'error');
+        return '';
+      }
+      return queryParts.join(' ');
+    }
+
+    // Abre a pesquisa no Google em nova aba
+    function performSearch() {
+      const query = buildQuery();
+      if (!query) return;
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(searchUrl, '_blank');
+      showNotification('Pesquisa realizada com sucesso!', 'success');
+    }
+
+    // Exibe o preview da query
+    function previewSearch() {
+      const query = buildQuery();
+      if (!query) return;
+      const previewElement = document.getElementById('queryPreview');
+      previewElement.textContent = query;
+      previewElement.classList.add('active');
+      updateChips();
+      showNotification('Visualização atualizada!', 'success');
+    }
+
+    // Copia a query para a área de transferência
+    function copyQuery() {
+      const query = buildQuery();
+      if (!query) return;
+      navigator.clipboard.writeText(query)
+        .then(() => showNotification('Query copiada!', 'success'))
+        .catch(() => showNotification('Erro ao copiar!', 'error'));
+    }
+
+    // Limpa o formulário e o preview
+    function clearForm() {
+      document.getElementById('dorkForm').reset();
+      document.getElementById('queryPreview').classList.remove('active');
+      document.getElementById('queryPreview').textContent = '';
+      document.getElementById('queryChips').innerHTML = '';
+      showNotification('Formulário limpo!', 'success');
+    }
+
+    // Alterna a exibição das opções avançadas
+    function toggleAdvancedOptions() {
+      const advancedDiv = document.getElementById('advancedOptions');
+      const toggleButton = document.getElementById('toggleAdvanced');
+      if (advancedDiv.style.display === 'none' || advancedDiv.style.display === '') {
+        advancedDiv.style.display = 'block';
+        toggleButton.innerHTML = 'Opções Avançadas <i class="fas fa-chevron-up"></i>';
+      } else {
+        advancedDiv.style.display = 'none';
+        toggleButton.innerHTML = 'Opções Avançadas <i class="fas fa-chevron-down"></i>';
+      }
+    }
+
+    // Exibe notificações (toasts)
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.background = type === 'success' ? 'var(--success)' : 'var(--error)';
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
