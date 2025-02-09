@@ -4,23 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Ferramenta avançada para criação de Google Dorks">
-  <title>Google Dorks Generator Pro</title>
+  <title>Google Dorks</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* Tema: Preto e Roxo Escuro */
     :root {
-      --primary-color: #8e24aa; /* Roxo escuro */
-      --background: #121212;    /* Preto */
-      --surface: #1e1e1e;       /* Preto levemente mais claro */
-      --accent-color: #d81b60;  /* Um tom complementar para hover */
+      --primary-color: #00ff9d;
+      --primary-dark: #00cc7e;
+      --background: #080f1f;
+      --surface: rgba(13, 20, 40, 0.95);
+      --accent-color: #0ef;
       --text-primary: #ffffff;
-      --text-secondary: #bdbdbd;
-      --error: #ff5252;
-      --success: #4caf50;
+      --text-secondary: #7a8bb0;
+      --error: #ff3860;
+      --success: #00ff9d;
       --transition-speed: 0.3s;
+      --neon-shadow: 0 0 10px rgba(0, 255, 157, 0.5),
+                     0 0 20px rgba(0, 255, 157, 0.3),
+                     0 0 30px rgba(0, 255, 157, 0.2);
+      --neon-glow: 0 0 5px rgba(0, 255, 157, 0.5);
+      --glass-border: 1px solid rgba(0, 255, 157, 0.2);
+      --glass-shadow: 0 8px 32px rgba(0, 255, 157, 0.1);
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -29,43 +35,67 @@
     
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #121212, #1b1b1b);
+      background: radial-gradient(circle at center, #0a1128, #080f1f);
       color: var(--text-primary);
       min-height: 100vh;
       padding: 2rem 1rem;
-      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+      position: relative;
+      overflow-x: hidden;
+      transition: all var(--transition-speed) ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(14, 255, 255, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
     }
     
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
       background: var(--surface);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-      padding: 2rem;
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: var(--glass-shadow),
+                  inset 0 0 100px rgba(0, 255, 157, 0.05);
+      padding: 2.5rem;
+      border: var(--glass-border);
+      animation: containerFadeIn 1s ease;
     }
     
     header {
       text-align: center;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--primary-color);
-      padding-bottom: 1rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      position: relative;
     }
     
     header h1 {
-      color: var(--primary-color);
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--neon-shadow);
+      letter-spacing: -2px;
+      animation: glowPulse 2s infinite alternate;
     }
     
     header p {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
     }
     
-    /* Formulário */
     form {
       margin-bottom: 1rem;
     }
@@ -83,6 +113,17 @@
     
     .input-group {
       position: relative;
+      margin-bottom: 1rem;
+    }
+    
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 38px; /* Ajustado para alinhar com o input */
+      color: var(--text-secondary);
+      pointer-events: none;
+      font-size: 0.9rem; /* Tamanho do ícone reduzido */
+      z-index: 1;
     }
     
     label {
@@ -90,22 +131,35 @@
       margin-bottom: 0.5rem;
       color: var(--text-primary);
       font-weight: 500;
+      font-size: 0.9rem;
+      line-height: 1;
     }
     
     input[type="text"] {
       width: 100%;
-      padding: 0.75rem 1rem;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      background: #2c2c2c;
+      padding: 0.8rem 2.8rem; /* Padding ajustado para o ícone */
+      border: 2px solid rgba(0, 255, 157, 0.1);
+      border-radius: 12px;
+      background: rgba(8, 15, 31, 0.8);
+      backdrop-filter: blur(5px);
       color: var(--text-primary);
-      transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+      transition: all var(--transition-speed) ease;
+      font-size: 1rem;
+      height: 45px; /* Altura ajustada */
+      line-height: normal;
+    }
+
+    input[type="text"]:hover {
+      border-color: rgba(0, 255, 157, 0.3);
+      box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
     }
     
     input[type="text"]:focus {
       border-color: var(--primary-color);
-      box-shadow: 0 0 8px var(--primary-color);
+      box-shadow: var(--neon-shadow);
+      background: rgba(0, 0, 0, 0.3);
       outline: none;
+      transform: translateY(-2px);
     }
     
     .actions {
@@ -117,33 +171,71 @@
     }
     
     .actions button {
-      padding: 0.75rem 1.5rem;
-      background: var(--primary-color);
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(135deg, 
+        rgba(0, 255, 157, 0.8), 
+        rgba(14, 255, 255, 0.8));
+      backdrop-filter: blur(5px);
       border: none;
-      color: var(--background);
-      border-radius: 8px;
+      color: white;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: 500;
-      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: all var(--transition-speed) ease;
+      box-shadow: var(--neon-glow);
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      transform-origin: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
     
     .actions button:hover {
-      background: var(--accent-color);
-      transform: scale(1.05);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--neon-shadow);
+      background: linear-gradient(135deg, 
+        rgba(0, 255, 157, 1), 
+        rgba(14, 255, 255, 1));
+    }
+
+    .actions button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .actions button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .actions button:hover::before {
+      left: 100%;
     }
     
-    /* Botão de Toggle para Opções Avançadas */
     #toggleAdvanced {
       background: transparent;
       color: var(--primary-color);
       border: 2px solid var(--primary-color);
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
       cursor: pointer;
-      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+      transition: all var(--transition-speed) ease, transform var(--transition-speed) ease;
       margin: 0 auto 1rem auto;
       display: block;
       font-weight: 500;
@@ -153,9 +245,9 @@
       background: var(--primary-color);
       color: var(--background);
       transform: scale(1.05);
+      box-shadow: var(--neon-shadow);
     }
     
-    /* Seção Avançada (Collapsible) */
     #advancedOptions {
       display: none;
       margin-bottom: 1rem;
@@ -163,14 +255,15 @@
       border-top: 1px solid var(--text-secondary);
     }
     
-    /* Preview e Chips */
     .preview, .chips {
-      background: #1e1e1e;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      word-break: break-all;
-      font-size: 0.95rem;
+      background: rgba(8, 15, 31, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      transition: all var(--transition-speed) ease;
     }
     
     .preview {
@@ -189,26 +282,44 @@
     }
     
     .chip {
-      background: var(--primary-color);
-      color: var(--background);
-      padding: 0.3rem 0.7rem;
-      border-radius: 12px;
-      font-size: 0.8rem;
+      background: linear-gradient(135deg, 
+        rgba(0, 255, 157, 0.2), 
+        rgba(14, 255, 255, 0.2));
+      backdrop-filter: blur(5px);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
       font-weight: 500;
+      box-shadow: 0 2px 8px rgba(156, 39, 176, 0.2);
+      animation: scaleIn 0.3s ease;
+      border: 1px solid rgba(0, 255, 157, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--neon-shadow);
+      border-color: var(--primary-color);
     }
     
-    /* Notificações (toasts) */
     .notification {
       position: fixed;
       bottom: 20px;
       right: 20px;
       padding: 1rem 1.5rem;
-      border-radius: 8px;
+      border-radius: 12px;
       color: #ffffff;
       display: none;
       opacity: 0;
       transition: opacity var(--transition-speed) ease;
       font-size: 0.95rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.3s ease;
+      background: var(--surface) !important;
+      border: 1px solid var(--primary-color);
+      box-shadow: var(--neon-glow);
     }
     
     .notification.show {
@@ -216,14 +327,63 @@
       opacity: 1;
     }
     
-    /* Footer */
     footer {
       text-align: center;
       margin-top: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      padding-top: 1rem;
-      border-top: 1px solid var(--primary-color);
+      padding: 1.5rem;
+      border-top: 2px solid var(--primary-color);
+      background: linear-gradient(180deg, 
+        transparent,
+        rgba(0, 255, 157, 0.05));
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 12px 12px;
+    }
+    
+    footer .author {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    footer .author span {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-shadow: var(--neon-shadow);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes glowPulse {
+      0% { text-shadow: var(--neon-shadow); }
+      100% { text-shadow: 0 0 20px rgba(0, 255, 157, 0.8),
+                         0 0 30px rgba(0, 255, 157, 0.6),
+                         0 0 40px rgba(0, 255, 157, 0.4); }
+    }
+
+    @keyframes containerFadeIn {
+      0% { 
+        opacity: 0;
+        transform: translateY(20px);
+        backdrop-filter: blur(0px);
+      }
+      100% { 
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(20px);
+      }
     }
     
     @media (max-width: 768px) {
@@ -234,100 +394,273 @@
       .actions {
         flex-direction: column;
       }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .container {
+        padding: 1.5rem;
+        margin: 0.5rem;
+        border-radius: 16px;
+      }
+
+      .actions button {
+        padding: 1rem 2rem;
+        width: 100%;
+      }
+    }
+    
+    .groups-section {
+      margin: 1rem 0;
+    }
+
+    #toggleGroups {
+      width: 100%;
+      background: transparent;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    #toggleGroups:hover {
+      background: var(--accent-color);
+      color: var(--background);
+      box-shadow: var(--neon-shadow);
+    }
+
+    .social-search {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out;
+      background: rgba(8, 15, 31, 0.8);
+      backdrop-filter: blur(10px);
+      border: var(--glass-border);
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    .social-search.active {
+      max-height: 300px;
+      padding: 1.5rem;
+    }
+
+    .platform-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-groups-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      border: none;
+      color: var(--background);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .search-groups-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--neon-shadow);
+    }
+
+    .platform-btn {
+      padding: 0.8rem 1.5rem;
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      flex: 1;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .platform-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--neon-shadow);
+      background: var(--primary-color);
+      color: var(--background);
+    }
+
+    .platform-btn.active {
+      background: linear-gradient(135deg, 
+        rgba(0, 255, 157, 0.8), 
+        rgba(14, 255, 255, 0.8));
+      color: var(--background);
+      border: none;
+      box-shadow: var(--neon-glow);
+    }
+
+    .platform-btn.active:hover {
+      background: linear-gradient(135deg, 
+        rgba(0, 255, 157, 1), 
+        rgba(14, 255, 255, 1));
+      box-shadow: var(--neon-shadow);
+    }
+
+    .search-groups-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      border: none;
+      color: var(--background);
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      box-shadow: var (--neon-glow);
+    }
+
+    .search-groups-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--neon-shadow);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Google Dorks Generator Pro</h1>
+      <h1>Google Dorks</h1>
       <p>Crie pesquisas avançadas no Google combinando diferentes operadores de busca.</p>
     </header>
 
     <form id="dorkForm">
-      <!-- Campos Básicos: Apenas Termos Gerais e Frase Exata -->
       <div class="form-grid single">
         <div class="input-group">
+          <i class="fas fa-search"></i>
           <label for="pesquisaComum">Termos Gerais</label>
           <input type="text" id="pesquisaComum" placeholder="Ex: segurança informação">
         </div>
         <div class="input-group">
+          <i class="fas fa-quote-right"></i>
           <label for="buscaExata">Frase Exata</label>
           <input type="text" id="buscaExata" placeholder='Ex: "senha de administrador"'>
         </div>
       </div>
 
-      <!-- Botão para Alternar Opções Avançadas -->
+      <div class="groups-section">
+        <button type="button" id="toggleGroups" onclick="toggleGroupSearch()">
+          <i class="fas fa-users"></i> Buscar Grupos de WhatsApp/Telegram
+        </button>
+        
+        <div id="socialSearch" class="social-search">
+          <div class="platform-buttons">
+            <button type="button" class="platform-btn active" onclick="setPlatform('whatsapp')">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button type="button" class="platform-btn" onclick="setPlatform('telegram')">
+              <i class="fab fa-telegram"></i> Telegram
+            </button>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-users"></i>
+            <label for="groupSearchTerm">Tema do Grupo</label>
+            <input type="text" id="groupSearchTerm" placeholder="Ex: carros, jogos, tecnologia">
+          </div>
+          <button class="search-groups-btn" onclick="searchGroups()">
+            <i class="fas fa-search"></i> Buscar Grupos
+          </button>
+        </div>
+      </div>
+
       <button type="button" id="toggleAdvanced" onclick="toggleAdvancedOptions()">
         Opções Avançadas <i class="fas fa-chevron-down"></i>
       </button>
 
-      <!-- Seção Avançada: Campos Ocultos -->
       <div id="advancedOptions">
         <div class="form-grid">
           <div class="input-group">
+            <i class="fas fa-align-left"></i>
             <label for="intext">No Texto (intext)</label>
             <input type="text" id="intext" placeholder="Ex: confidential">
           </div>
           <div class="input-group">
+            <i class="fas fa-heading"></i>
             <label for="intitle">No Título (intitle)</label>
             <input type="text" id="intitle" placeholder="Ex: index of">
           </div>
           <div class="input-group">
+            <i class="fas fa-globe"></i>
             <label for="site">Site Específico (site)</label>
             <input type="text" id="site" placeholder="Ex: example.com">
           </div>
           <div class="input-group">
+            <i class="fas fa-link"></i>
             <label for="inurl">Na URL (inurl)</label>
             <input type="text" id="inurl" placeholder="Ex: admin">
           </div>
           <div class="input-group">
+            <i class="fas fa-file"></i>
             <label for="filetype">Tipo de Arquivo (filetype)</label>
             <input type="text" id="filetype" placeholder="Ex: pdf">
           </div>
           <div class="input-group">
+            <i class="fas fa-ban"></i>
             <label for="excluirTermos">Excluir Termos</label>
             <input type="text" id="excluirTermos" placeholder="Ex: spam, anúncio">
           </div>
           <div class="input-group">
+            <i class="fas fa-anchor"></i>
             <label for="inanchor">No Âncora (inanchor)</label>
             <input type="text" id="inanchor" placeholder="Ex: clique aqui">
           </div>
         </div>
       </div>
 
-      <!-- Ações -->
       <div class="actions">
-        <button type="button" onclick="previewSearch()">
-          <i class="fas fa-eye"></i> Visualizar
-        </button>
         <button type="button" onclick="performSearch()">
-          <i class="fas fa-search"></i> Pesquisar
+          <i class="fas fa-search"></i> Pesquisar no Google
         </button>
         <button type="button" onclick="copyQuery()">
-          <i class="fas fa-copy"></i> Copiar
+          <i class="fas fa-copy"></i> Copiar Consulta
         </button>
         <button type="button" onclick="clearForm()">
-          <i class="fas fa-trash"></i> Limpar
+          <i class="fas fa-trash"></i> Limpar Tudo
         </button>
       </div>
     </form>
 
-    <!-- Preview e Chips -->
     <div id="queryPreview" class="preview"></div>
     <div id="queryChips" class="chips"></div>
   </div>
 
-  <!-- Footer -->
   <footer>
-    Criado por Aleksandro Alves
+    <div class="author">
+      Desenvolvido por <span>Aleksandro Alves</span>
+    </div>
   </footer>
 
-  <!-- Notificação (toast) -->
   <div id="notification" class="notification"></div>
 
   <script>
-    // Mapeia os operadores e suas formatações
     const operators = {
       pesquisaComum: value => value,
       buscaExata: value => `"${value}"`,
@@ -340,7 +673,6 @@
       inanchor: value => `inanchor:${value}`
     };
 
-    // Atualiza o preview em tempo real
     document.querySelectorAll('#dorkForm input').forEach(input => {
       input.addEventListener('input', updatePreview);
     });
@@ -359,7 +691,6 @@
       }
     }
 
-    // Atualiza os "chips" que mostram quais operadores foram utilizados
     function updateChips() {
       const chipsContainer = document.getElementById('queryChips');
       chipsContainer.innerHTML = '';
@@ -375,7 +706,6 @@
       }
     }
 
-    // Monta a query com base nos campos preenchidos
     function buildQuery(showError = true) {
       let queryParts = [];
       for (const [field, formatter] of Object.entries(operators)) {
@@ -392,7 +722,6 @@
       return queryParts.join(' ');
     }
 
-    // Abre a pesquisa no Google em nova aba
     function performSearch() {
       const query = buildQuery();
       if (!query) return;
@@ -401,18 +730,6 @@
       showNotification('Pesquisa realizada com sucesso!', 'success');
     }
 
-    // Exibe o preview da query
-    function previewSearch() {
-      const query = buildQuery();
-      if (!query) return;
-      const previewElement = document.getElementById('queryPreview');
-      previewElement.textContent = query;
-      previewElement.classList.add('active');
-      updateChips();
-      showNotification('Visualização atualizada!', 'success');
-    }
-
-    // Copia a query para a área de transferência
     function copyQuery() {
       const query = buildQuery();
       if (!query) return;
@@ -421,7 +738,6 @@
         .catch(() => showNotification('Erro ao copiar!', 'error'));
     }
 
-    // Limpa o formulário e o preview
     function clearForm() {
       document.getElementById('dorkForm').reset();
       document.getElementById('queryPreview').classList.remove('active');
@@ -430,7 +746,6 @@
       showNotification('Formulário limpo!', 'success');
     }
 
-    // Alterna a exibição das opções avançadas
     function toggleAdvancedOptions() {
       const advancedDiv = document.getElementById('advancedOptions');
       const toggleButton = document.getElementById('toggleAdvanced');
@@ -443,7 +758,6 @@
       }
     }
 
-    // Exibe notificações (toasts)
     function showNotification(message, type = 'success') {
       const notification = document.getElementById('notification');
       notification.textContent = message;
@@ -452,6 +766,73 @@
       setTimeout(() => {
         notification.classList.remove('show');
       }, 3000);
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const iconMap = {
+        'pesquisaComum': 'fa-search',
+        'buscaExata': 'fa-quote-right',
+        'intext': 'fa-align-left',
+        'intitle': 'fa-heading',
+        'site': 'fa-globe',
+        'inurl': 'fa-link',
+        'filetype': 'fa-file',
+        'excluirTermos': 'fa-ban',
+        'inanchor': 'fa-anchor'
+      };
+
+      Object.entries(iconMap).forEach(([id, icon]) => {
+        const input = document.getElementById(id);
+        if (input) {
+          const wrapper = input.parentElement;
+          wrapper.insertAdjacentHTML('afterbegin', `<i class="fas ${icon}"></i>`);
+        }
+      });
+    });
+
+    let currentPlatform = 'whatsapp';
+
+    function setPlatform(platform) {
+      currentPlatform = platform;
+      // Atualizar visual dos botões
+      document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(platform)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    function searchGroups() {
+      const term = document.getElementById('groupSearchTerm').value.trim();
+      if (!term) {
+        showNotification('Digite um tema para buscar!', 'error');
+        return;
+      }
+
+      let query = '';
+      if (currentPlatform === 'whatsapp') {
+        query = `${term} "chat.whatsapp.com"`;
+      } else {
+        query = `${term} "t.me"`;
+      }
+
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(searchUrl, '_blank');
+      showNotification(`Buscando grupos de ${currentPlatform}!`, 'success');
+    }
+
+    function toggleGroupSearch() {
+      const socialSearch = document.getElementById('socialSearch');
+      const toggleBtn = document.getElementById('toggleGroups');
+      
+      socialSearch.classList.toggle('active');
+      
+      if (socialSearch.classList.contains('active')) {
+        toggleBtn.innerHTML = '<i class="fas fa-times"></i> Fechar Busca de Grupos';
+      } else {
+        toggleBtn.innerHTML = '<i class="fas fa-users"></i> Buscar Grupos de WhatsApp/Telegram';
+      }
     }
   </script>
 </body>
